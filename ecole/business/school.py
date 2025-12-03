@@ -7,6 +7,7 @@ Classe School
 from dataclasses import dataclass, field
 from datetime import date
 
+from daos.student_dao import StudentDao
 from daos.course_dao import CourseDao
 from models.address import Address
 from models.course import Course
@@ -53,9 +54,14 @@ class School:
         course_dao: CourseDao = CourseDao()
         return course_dao.read(id_course)
 
+    @staticmethod
+    def get_student_by_id(id_course: int):
+        student_dao: StudentDao = StudentDao()
+        return student_dao.read(id_course)
+
     def init_static(self) -> None:
         """Initialisation d'un jeu de test pour l'école."""
-        
+        """ 
         # création des étudiants et rattachement à leur adresse
         paul: Student    = Student('Paul', 'Dubois', 12)
         valerie: Student = Student('Valérie', 'Dumont', 13)
@@ -127,4 +133,4 @@ class School:
 
         william.add_course(anglais)
 
-        michel.add_course(sport)
+        michel.add_course(sport)"""
