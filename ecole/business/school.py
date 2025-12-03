@@ -7,6 +7,7 @@ Classe School
 from dataclasses import dataclass, field
 from datetime import date
 
+from daos.teacher_dao import TeacherDao
 from daos.student_dao import StudentDao
 from daos.course_dao import CourseDao
 from models.address import Address
@@ -58,6 +59,11 @@ class School:
     def get_student_by_id(id_course: int):
         student_dao: StudentDao = StudentDao()
         return student_dao.read(id_course)
+
+    @staticmethod
+    def get_teacher_by_id(id_course: int):
+        teacher_dao: TeacherDao = TeacherDao()
+        return teacher_dao.read(id_course)
 
     def init_static(self) -> None:
         """Initialisation d'un jeu de test pour l'école."""

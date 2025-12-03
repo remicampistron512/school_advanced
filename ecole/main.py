@@ -27,6 +27,9 @@ Bienvenue dans notre école
     print(school.get_course_by_id(2))
     print(school.get_course_by_id(9))
 
+    print(school.get_student_by_id(1))
+
+    print(school.get_teacher_by_id(4))
 
 if __name__ == '__main__':
     main()
