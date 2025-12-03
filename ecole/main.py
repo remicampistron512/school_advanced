@@ -31,5 +31,7 @@ Bienvenue dans notre école
 
     print(school.get_teacher_by_id(4))
 
+    print(school.get_address_by_id(1))
+
 if __name__ == '__main__':
     main()
