@@ -80,6 +80,11 @@ class School:
         return student_dao.read_all()
 
     @staticmethod
+    def get_all_courses():
+        course_dao: CourseDao = CourseDao()
+        return course_dao.read_all()
+
+    @staticmethod
     def get_address_by_id(id_course: int):
         address_dao: AddressDao = AddressDao()
         return address_dao.read(id_course)

@@ -38,6 +38,31 @@ class CourseDao(Dao[Course]):
 
         return course
 
+    def read_all(self) -> list[Course]:
+        """
+        Renvoit tous les courses
+        :return:
+        """
+        with Dao.connection.cursor() as cursor:
+            sql = "SELECT * FROM course"
+            cursor.execute(sql)
+            records = cursor.fetchall()
+
+        courses: list[Course] = []
+
+        for record in records:
+            course = Course(
+                name=record["name"],
+                start_date=record["start_date"],
+                end_date=record["end_date"],
+            )
+            course.id = record["id_course"]
+            courses.append(course)
+
+        return courses
+
+
+
     def update(self, course: Course) -> bool:
         """Met à jour en BD l'entité Course correspondant à course, pour y correspondre
 

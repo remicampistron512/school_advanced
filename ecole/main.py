@@ -35,12 +35,16 @@ Bienvenue dans notre école
 
     teachers = school.get_all_teachers()
     students = school.get_all_students()
+    courses = school.get_all_courses()
 
     for student in students:
         print(student)
 
     for teacher in teachers:
         print(teacher)
+
+    for course in courses:
+        print(course)
 
 
 if __name__ == '__main__':
