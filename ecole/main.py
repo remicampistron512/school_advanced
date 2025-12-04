@@ -6,6 +6,7 @@ Application de gestion d'une école
 """
 
 from business.school import School
+from models.student import Student
 
 
 def main() -> None:
@@ -37,6 +38,10 @@ Bienvenue dans notre école
     students = school.get_all_students()
     courses = school.get_all_courses()
 
+
+
+
+
     for student in students:
         print(student)
 
@@ -46,6 +51,12 @@ Bienvenue dans notre école
     for course in courses:
         print(course)
 
+    student1 = Student("charles", "xavier", 16)
+
+    if school.create_student(student1):
+        print("Étudiant créé")
+    else:
+        print("Échec de la creation de l'étudiant")
 
 if __name__ == '__main__':
     main()

@@ -13,16 +13,47 @@ from typing import Optional
 @dataclass
 class StudentDao(Dao[Student]):
     def create(self, student: Student) -> int:
-        """Crée en BD l'entité Course correspondant au cours course
-
-        :param course: à créer sous forme d'entité Course en BD
-        :return: l'id de l'entité insérée en BD (0 si la création a échoué)
+        """Crée en BD l'entité student correspondant à un étudiant Student
+        :param student: à créer sous forme d'entité student en BD
+        :return: l'id de l'entité person insérée en BD (0 si la création a échoué)
         """
-        ...
-        return 0
+        try:
+            with Dao.connection.cursor() as cursor:
+                # 1) Insère dans Person
+                sql_person = """
+                    INSERT INTO person (age, first_name, last_name)
+                    VALUES (%s, %s, %s)
+                """
+                cursor.execute(
+                    sql_person,
+                    (student.age, student.first_name, student.last_name)
+                )
+
+                # Récupère le dernier id généré
+                person_id = cursor.lastrowid
+
+                # 2) Insère dans student en utilisant person_id
+                sql_student = """
+                    INSERT INTO student (id_person)
+                    VALUES (%s)
+                """
+                cursor.execute(
+                    sql_student,
+                    (person_id)
+                )
+
+            # 3) Commit the transaction
+            Dao.connection.commit()
+            return person_id
+
+        except Exception as e:
+            # Optionally log the error here
+            print(e)
+            Dao.connection.rollback()
+            return 0
 
     def read(self, id_student: int) -> Optional[Student]:
-        """Renvoit le cours correspondant à l'entité dont l'id est id_course
+        """Renvoie le cours correspondant à l'entité dont l'id est id_course
            (ou None s'il n'a pu être trouvé)"""
         student: Optional[Student]
 

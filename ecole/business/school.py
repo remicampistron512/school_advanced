@@ -51,8 +51,10 @@ class School:
                 print(f"- {student}")
             print()
 
-
-
+    @staticmethod
+    def create_student(student:Student):
+        student_dao: StudentDao = StudentDao()
+        return student_dao.create(student)
 
     @staticmethod
     def get_course_by_id(id_course: int):
