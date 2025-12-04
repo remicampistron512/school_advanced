@@ -38,10 +38,6 @@ Bienvenue dans notre école
     students = school.get_all_students()
     courses = school.get_all_courses()
 
-
-
-
-
     for student in students:
         print(student)
 
@@ -61,6 +57,8 @@ Bienvenue dans notre école
     student_to_modify =  school.get_student_by_id(1)
     student_to_modify.age = 77
     school.update_student(student_to_modify)
+
+    # school.delete_student(18)
 
 if __name__ == '__main__':
     main()

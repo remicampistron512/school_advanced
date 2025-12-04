@@ -61,6 +61,11 @@ class School:
         student_dao: StudentDao = StudentDao()
         return student_dao.update(student)
 
+    @staticmethod
+    def delete_student(id_student:int):
+        student_dao: StudentDao = StudentDao()
+        return student_dao.delete(id_student)
+
 
     @staticmethod
     def get_course_by_id(id_course: int):

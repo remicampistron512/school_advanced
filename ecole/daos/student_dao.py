@@ -121,11 +121,27 @@ class StudentDao(Dao[Student]):
             Dao.connection.rollback()
             return False
 
-    def delete(self, student: Student) -> bool:
-        """Supprime en BD l'entité Course correspondant à course
+    def delete(self, id_student: int) -> bool:
+        """Supprime en BD l'entité Student correspondant à Student
 
-        :param course: cours dont l'entité Course correspondante est à supprimer
+        :param course: cours dont l'entité Student correspondante est à supprimer
         :return: True si la suppression a pu être réalisée
         """
-        ...
-        return True
+        student: Optional[Student]
+        try:
+            with Dao.connection.cursor() as cursor:
+                sql = "DELETE FROM person WHERE id_person = %s"
+                cursor.execute(sql, (id_student,))
+
+                # 3) Commit the transaction
+                Dao.connection.commit()
+                return True
+        except Exception as e:
+            # Optionally log the error here
+            print(e)
+            Dao.connection.rollback()
+            return False
+
+
+
+
