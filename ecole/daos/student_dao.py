@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Classe Dao[Course]
+Classe Dao[Student]
 """
 
 from models.student import Student
@@ -53,7 +53,7 @@ class StudentDao(Dao[Student]):
             return 0
 
     def read(self, id_student: int) -> Optional[Student]:
-        """Renvoie le cours correspondant à l'entité dont l'id est id_course
+        """Renvoie le student correspondant à l'entité dont l'id est id_student
            (ou None s'il n'a pu être trouvé)"""
         student: Optional[Student]
 
@@ -71,7 +71,7 @@ class StudentDao(Dao[Student]):
 
     def read_all(self) -> list[Student]:
         """
-        Renvoit tous les Teachers
+        Renvoie tous les Students
         :return:
         """
         with Dao.connection.cursor() as cursor:
@@ -124,7 +124,7 @@ class StudentDao(Dao[Student]):
     def delete(self, id_student: int) -> bool:
         """Supprime en BD l'entité Student correspondant à Student
 
-        :param course: cours dont l'entité Student correspondante est à supprimer
+        :param id_student: id_student du student à supprimer
         :return: True si la suppression a pu être réalisée
         """
         student: Optional[Student]
