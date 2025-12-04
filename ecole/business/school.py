@@ -57,6 +57,12 @@ class School:
         return student_dao.create(student)
 
     @staticmethod
+    def update_student(student:Student):
+        student_dao: StudentDao = StudentDao()
+        return student_dao.update(student)
+
+
+    @staticmethod
     def get_course_by_id(id_course: int):
         course_dao: CourseDao = CourseDao()
         return course_dao.read(id_course)

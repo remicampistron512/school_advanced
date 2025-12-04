@@ -58,5 +58,9 @@ Bienvenue dans notre école
     else:
         print("Échec de la creation de l'étudiant")
 
+    student_to_modify =  school.get_student_by_id(1)
+    student_to_modify.age = 77
+    school.update_student(student_to_modify)
+
 if __name__ == '__main__':
     main()

@@ -63,7 +63,7 @@ class StudentDao(Dao[Student]):
             record = cursor.fetchone()
         if record is not None:
             student = Student(record['first_name'], record['last_name'], record['age'])
-            student.id = record['student_nbr']
+            student.id = record['id_person']
         else:
             student = None
 
@@ -93,13 +93,33 @@ class StudentDao(Dao[Student]):
         return students
     
     def update(self, student: Student) -> bool:
-        """Met à jour en BD l'entité Course correspondant à course, pour y correspondre
+        """Met à jour en BD l'entité Student correspondant à student, pour y correspondre
 
-        :param course: cours déjà mis à jour en mémoire
+        :param student: student déjà mis à jour en mémoire
         :return: True si la mise à jour a pu être réalisée
         """
-        ...
-        return True
+        try:
+            with Dao.connection.cursor() as cursor:
+                # 1) Insère dans Person
+                sql_person = """
+                    UPDATE person 
+                    SET age = %s, first_name = %s, last_name = %s
+                    WHERE id_person = %s
+                """
+                cursor.execute(
+                    sql_person,
+                    (student.age, student.first_name, student.last_name,student.id)
+                )
+
+            # 3) Commit the transaction
+            Dao.connection.commit()
+            return True
+
+        except Exception as e:
+            # Optionally log the error here
+            print(e)
+            Dao.connection.rollback()
+            return False
 
     def delete(self, student: Student) -> bool:
         """Supprime en BD l'entité Course correspondant à course
