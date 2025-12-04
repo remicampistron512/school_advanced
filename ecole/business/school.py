@@ -75,6 +75,11 @@ class School:
         return teacher_dao.read_all()
 
     @staticmethod
+    def get_all_students():
+        student_dao: StudentDao = StudentDao()
+        return student_dao.read_all()
+
+    @staticmethod
     def get_address_by_id(id_course: int):
         address_dao: AddressDao = AddressDao()
         return address_dao.read(id_course)

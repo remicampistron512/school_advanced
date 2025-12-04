@@ -38,6 +38,29 @@ class StudentDao(Dao[Student]):
 
         return student
 
+    def read_all(self) -> list[Student]:
+        """
+        Renvoit tous les Teachers
+        :return:
+        """
+        with Dao.connection.cursor() as cursor:
+            sql = "SELECT * FROM person INNER JOIN student on student.id_person = person.id_person"
+            cursor.execute(sql)
+            records = cursor.fetchall()
+
+        students: list[Student] = []
+
+        for record in records:
+            student = Student(
+                first_name=record["first_name"],
+                last_name=record["last_name"],
+                age=record["age"],
+            )
+            student.id = record["student_nbr"]
+            students.append(student)
+
+        return students
+    
     def update(self, student: Student) -> bool:
         """Met à jour en BD l'entité Course correspondant à course, pour y correspondre
 
