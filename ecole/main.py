@@ -33,5 +33,12 @@ Bienvenue dans notre école
 
     print(school.get_address_by_id(1))
 
+    teachers = school.get_all_teachers()
+
+    for teacher in teachers:
+        print(teacher)
+
+
+
 if __name__ == '__main__':
     main()

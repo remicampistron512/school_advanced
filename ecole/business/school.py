@@ -51,6 +51,9 @@ class School:
                 print(f"- {student}")
             print()
 
+
+
+
     @staticmethod
     def get_course_by_id(id_course: int):
         course_dao: CourseDao = CourseDao()
@@ -65,6 +68,11 @@ class School:
     def get_teacher_by_id(id_course: int):
         teacher_dao: TeacherDao = TeacherDao()
         return teacher_dao.read(id_course)
+
+    @staticmethod
+    def get_all_teachers():
+        teacher_dao: TeacherDao = TeacherDao()
+        return teacher_dao.read_all()
 
     @staticmethod
     def get_address_by_id(id_course: int):
